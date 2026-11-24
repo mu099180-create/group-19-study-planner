@@ -16,5 +16,12 @@ Institution: UNILAK
 GitHub account used for submission: mu099180-create
 
 ## Phases
+
 - Phase 1: Static screen
 - Phase 2: Working list
+
+## Screenshots
+
+### Phase 1
+
+![Phase 1](phase1_app.jpeg)
