@@ -1,17 +1,20 @@
-# study_planner
+# My Study Planner — Group 19
 
-A new Flutter project.
+Course: Mobile Application Development (Dart & Flutter)
+Institution: UNILAK
 
-## Getting Started
+## Group members
 
-This project is a starting point for a Flutter application.
+| # | Full name | Registration number |
+|---|-----------|---------------------|
+| 1 | Mohamed Ahmed | 27051/2024 |
+| 2 | Mohmaed Mousa | 26421/2024 |
+| 3 | Mustafa Eliass Abdulhalim | 26501/2024 |
+| 4 | Osman Albager | 25969/2024 |
+| 5 | Ahmed Abass | 25968/2024 |
 
-A few resources to get you started if this is your first Flutter project:
+GitHub account used for submission: mu099180-create
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Phases
+- Phase 1: Static screen
+- Phase 2: Working list
