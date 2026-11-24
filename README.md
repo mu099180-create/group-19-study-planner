@@ -25,3 +25,13 @@ GitHub account used for submission: mu099180-create
 ### Phase 1
 
 ![Phase 1](phase1_app.jpeg)
+
+### Phase 2
+
+Before toggling:
+
+![Phase 2 before](phase2_before.jpeg)
+
+After toggling (with a newly added goal):
+
+![Phase 2 after](phase2_after.jpeg)
