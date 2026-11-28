@@ -134,62 +134,96 @@ class _StudyPlannerState extends State<StudyPlanner> {
       ),
       // DYNAMIC: Add button
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          String subject = '';
-          String studyHours = '';
-
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('Add Study Goal'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      decoration: const InputDecoration(labelText: 'Subject'),
-                      onChanged: (value) {
-                        subject = value;
-                      },
-                    ),
-                    TextField(
-                      decoration: const InputDecoration(labelText: 'Hours'),
-                      keyboardType: TextInputType.number,
-                      onChanged: (value) {
-                        studyHours = value;
-                      },
-                    ),
-                  ],
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      if (subject.trim().isNotEmpty &&
-                          (int.tryParse(studyHours) ?? 0) > 0) {
-                        setState(() {
-                          goals.add({
-                            'subject': subject.trim(),
-                            'hours': int.parse(studyHours),
-                            'done': false,
-                          });
-                        });
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: const Text('Add'),
-                  ),
-                ],
-              );
-            },
+        onPressed: () async {
+          final result = await Navigator.push<Map<String, dynamic>>(
+            context,
+            MaterialPageRoute(builder: (context) => const AddGoalScreen()),
           );
+          if (result != null) {
+            setState(() {
+              goals.add(result);
+            });
+          }
         },
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+// STATIC: second screen for adding a goal
+class AddGoalScreen extends StatefulWidget {
+  const AddGoalScreen({super.key});
+
+  @override
+  State<AddGoalScreen> createState() => _AddGoalScreenState();
+}
+
+class _AddGoalScreenState extends State<AddGoalScreen> {
+  // LOGIC: text controllers and error messages
+  final TextEditingController subjectController = TextEditingController();
+  final TextEditingController hoursController = TextEditingController();
+  String? subjectError;
+  String? hoursError;
+
+  // LOGIC: validate, then return the new goal with Navigator.pop
+  void saveGoal() {
+    final String subject = subjectController.text.trim();
+    final int? hours = int.tryParse(hoursController.text.trim());
+
+    setState(() {
+      subjectError = subject.isEmpty ? 'Subject must not be empty' : null;
+      hoursError = (hours == null || hours <= 0)
+          ? 'Hours must be a number greater than 0'
+          : null;
+    });
+
+    if (subjectError == null && hoursError == null) {
+      Navigator.pop(context, {
+        'subject': subject,
+        'hours': hours!,
+        'done': false,
+      });
+    }
+  }
+
+  // LOGIC: dispose the controllers when the screen closes
+  @override
+  void dispose() {
+    subjectController.dispose();
+    hoursController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // STATIC: App bar
+      appBar: AppBar(title: const Text('Add Goal')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextField(
+              controller: subjectController,
+              decoration: InputDecoration(
+                labelText: 'Subject',
+                errorText: subjectError,
+              ),
+            ),
+            TextField(
+              controller: hoursController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Hours',
+                errorText: hoursError,
+              ),
+            ),
+            const SizedBox(height: 16),
+            // CONNECTION: Save button calls saveGoal
+            ElevatedButton(onPressed: saveGoal, child: const Text('Save')),
+          ],
+        ),
       ),
     );
   }
