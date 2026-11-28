@@ -4,54 +4,57 @@ void main() {
   runApp(const MyApp());
 }
 
-// STATIC: app root
+//STATIC: Main application
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        // STATIC: app bar
-        appBar: AppBar(title: const Text('My Study Planner')),
-        // STATIC: goals list
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            // STATIC: heading
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'My Goals',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
+      debugShowCheckedModeBanner: false,
+      title: 'My study Planner',
+      home: StudyPlanner(),
+    );
+  }
+}
+
+// STATIC: Home screen
+class StudyPlanner extends StatelessWidget {
+  const StudyPlanner({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // STATIC: App bar
+      appBar: AppBar(
+        title: const Text('My Study Planner'),
+        backgroundColor: Colors.blue,
+      ),
+      // STATIC: Study goals
+      body: Column(
+        children: [
+          const Text('My Study Goals', style: TextStyle(fontSize: 24)),
+          const Card(
+            child: ListTile(title: Text('Flutter'), subtitle: Text('3 hours')),
+          ),
+          const Card(
+            child: ListTile(
+              title: Text('Web Technology'),
+              subtitle: Text('4 hours'),
             ),
-            // STATIC: goal cards
-            Card(
-              child: ListTile(
-                title: Text('Web Technology'),
-                subtitle: Text('hours'),
-              ),
+          ),
+          const Card(
+            child: ListTile(
+              title: Text('Software Architecture'),
+              subtitle: Text('2 hours'),
             ),
-            Card(
-              child: ListTile(
-                title: Text('IT Law And Business Ethics'),
-                subtitle: Text('5 hours'),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                title: Text('English'),
-                subtitle: Text('3 hours'),
-              ),
-            ),
-          ],
-        ),
-        // STATIC: floating action button
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.add),
-        ),
+          ),
+        ],
+      ),
+      // STATIC: Add button
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
